@@ -9,9 +9,11 @@
         <h2>Uutiset</h2>
 
         <div>
-            <ol>
-                <li th:each="uutinen : ${uutisetJulkaisuaika}" th:text="${uutinen.otsikko}"></li>
-            </ol>
+            <ul>
+                <li th:each="uutinen : ${uutisetJulkaisuaika}" 
+                    <span th:text="${uutinen.otsikko}"></span>
+                </li>
+            </ul>
         </div>
 
 
