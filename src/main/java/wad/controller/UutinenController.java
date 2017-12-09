@@ -17,14 +17,14 @@ public class UutinenController {
     @Autowired
     private UutinenRepository uutinenRepository;
 
-    @GetMapping("/")
+    @GetMapping("uutiset")
     public String list(Model model) {
         PageRequest pageable = PageRequest.of(0, 5, Sort.Direction.ASC, "julkaisuaika");
         model.addAttribute("uutisetJulkaisuaika", uutinenRepository.findAll(pageable));
         return "uutiset";
     }
 
-    @PostMapping("/")
+    @PostMapping("uutiset")
     public String create(@RequestParam String name) {
         Uutinen u = new Uutinen();
         u.setOtsikko(name);
