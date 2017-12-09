@@ -1,5 +1,5 @@
 
-package wad;
+package wad.configuration;
 
 import javax.activation.DataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
