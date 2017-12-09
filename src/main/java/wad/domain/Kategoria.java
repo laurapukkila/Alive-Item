@@ -13,7 +13,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 @Entity
 public class Kategoria extends AbstractPersistable<Long> {
-    @ManyToMany (mappedBy = "kategoriat")
+    @ManyToMany (mappedBy = "kategoria")
     private List<Uutinen> uutiset;
     private String nimi;
 }
