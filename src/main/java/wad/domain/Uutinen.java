@@ -15,9 +15,9 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 @Entity
 public class Uutinen extends AbstractPersistable<Long> {
-    @ManyToMany (mappedBy = "uutiset")
+    @ManyToMany
     private List<Kirjoittaja> kirjoittajat;
-    @ManyToMany (mappedBy = "uutiset")
+    @ManyToMany
     private List<Kategoria> kategoriat;
     private String otsikko;
     private String ingressi;
