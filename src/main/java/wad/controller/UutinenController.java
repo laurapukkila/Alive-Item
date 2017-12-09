@@ -1,6 +1,8 @@
 package wad.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +19,9 @@ public class UutinenController {
 
     @GetMapping("/")
     public String list(Model model) {
-        model.addAttribute("uutiset", uutinenRepository.findAll());
-        return "index";
+        PageRequest pageable = PageRequest.of(0, 5, Sort.Direction.ASC, "julkaisuaika");
+        model.addAttribute("uutisetJulkaisuaika", uutinenRepository.findAll(pageable));
+        return "uutiset";
     }
 
     @PostMapping("/")
