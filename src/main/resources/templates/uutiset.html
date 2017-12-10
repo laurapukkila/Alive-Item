@@ -10,20 +10,15 @@
 
         <div>
             <ul>
-                <li th:each="uutinen : ${uutisetJulkaisuaika}" 
-                    <span th:text="${uutinen.otsikko}"></span>
+                <li th:each="uutinen : ${uutisetJulkaisuaika}">
+                    <a th:href="@{~/uutiset/{id}(id=${uutinen.id})}">
+                        <span th:text="${uutinen.otsikko}"></span>
+                    </a>
+
                 </li>
             </ul>
+
         </div>
-
-
-        <h2>Lisää uusi</h2>
-
-        <form method="POST" th:action="@{/uutiset}">
-            <input type="text" name="name"/>
-            <input type="submit" value="Add"/>
-        </form>
-
     </body>
 
 </html>

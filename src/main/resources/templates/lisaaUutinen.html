@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Lauran uutiset - Lisää Uutinen</title>
+    </head>
+    <body>
+        <h2>Lisää uusi uutinen</h2>
+
+        <form method="POST" th:action="@{/lisaaUutinen}">
+            Otsikko:
+            <input type="text" name="otsikko"/>
+            Ingressi:
+            <input type="text" name="ingressi"/>
+            Teksti:
+            <input type="text" name="teksti"/>
+            Kirjoittaja:
+            <input type="text" name="kirjoittaja"/>
+            Kategoria:
+            <select name="kategoria">
+                <option th:each="kategoria : ${kategoriat}" th:text="${kategoria.nimi}"></option>
+            </select>
+            <input type="submit" value="Lisää"/>
+        </form>
+    </body>
+</html>
