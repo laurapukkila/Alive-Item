@@ -21,6 +21,8 @@ public class UutinenController {
     public String list(Model model) {
         PageRequest pageable = PageRequest.of(0, 5, Sort.Direction.ASC, "julkaisuaika");
         model.addAttribute("uutisetJulkaisuaika", uutinenRepository.findAll(pageable));
+        PageRequest pageable1 = PageRequest.of(0,5, Sort.Direction.ASC, "lukukertoja");
+        model.addAttribute("uutisetSuosituimmat", uutinenRepository.findAll(pageable1));
         return "uutiset";
     }
 

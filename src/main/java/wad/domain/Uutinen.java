@@ -23,6 +23,7 @@ public class Uutinen extends AbstractPersistable<Long> {
     private String ingressi;
     private String teksti;
     private LocalDateTime julkaisuaika;
+    private Integer lukukertoja;
     
     public Uutinen() {
         this.julkaisuaika = LocalDateTime.now();
