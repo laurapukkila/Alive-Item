@@ -14,7 +14,7 @@ import wad.repository.UutinenRepository;
 @Controller
 public class UutinenController {
 
-    @Autowired
+    @Autowired(required = false)
     private UutinenRepository uutinenRepository;
 
     @GetMapping("/uutiset")
