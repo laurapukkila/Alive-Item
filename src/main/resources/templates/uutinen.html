@@ -6,6 +6,16 @@
     </head>
     <body>
 
+        <div>
+            <ul>
+                <li th:each="kategoria : ${listaakategoriat}">
+                    <a th:href="@{~/kategoria/{id}(id=${kategoria.id})}">
+                        <span th:text="${kategoria.nimi}"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
         <h1 th:text="${uutinen.otsikko}"></h1>
         <h2 th:text="${uutinen.ingressi}"></h2>
         <p th:text="${uutinen.teksti}"</p>

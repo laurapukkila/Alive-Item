@@ -126,6 +126,7 @@ public class UutinenController {
         model.addAttribute("kirjoittajat", uutinenRepository.getOne(id).getKirjoittajat());
         model.addAttribute("kategoriat", uutinenRepository.getOne(id).getKategoriat());
         model.addAttribute("julkaisuaika", uutinenRepository.getOne(id).getJulkaisuaika());
+        model.addAttribute("listaakategoriat", kategoriaRepository.findAll());
         return "uutinen";
     }
     
