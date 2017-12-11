@@ -23,30 +23,7 @@
             <input type="submit" value="Lisää"/>
         </form>
 
-        <h2> Lisää kategoria uutiselle</h2>
-
-        <form method="POST" th:action="@{/lisaaKategoria}">
-            <select name="uutinen">
-                <option th:each="uutinen : ${uutiset}" th:value="${uutinen.id}" th:text="${uutinen.otsikko}"></option>
-            </select>
-            <select name="kategoria">
-                <option th:each="kategoria : ${kategoriat}" th:value="${kategoria.id}"  th:text="${kategoria.nimi}"></option>
-            </select>
-            <input type="submit" value="Lisää"/>
-        </form>
-
-        <h2> Lisää kirjoittaja uutiselle</h2>
-
-        <form method="POST" th:action="@{/lisaaKirjoittaja}">
-            <select name="uutinen">
-                <option th:each="uutinen : ${uutiset}" th:value="${uutinen.id}" th:text="${uutinen.otsikko}"></option>
-            </select>
-            <select name="kirjoittaja">
-                <option th:each="kirjoittaja : ${kirjoittajat}" th:value="${kirjoittaja.id}"  th:text="${kirjoittaja.nimi}"></option>
-            </select>
-            <input type="submit" value="Lisää"/>
-        </form>
-
         <p><a href="/uutiset">Takaisin etusivulle</a></p>
+        <p><a href="/muokkaaUutista">Muokkaa olemassa olevaa uutista tästä! </a></p>
     </body>
 </html>

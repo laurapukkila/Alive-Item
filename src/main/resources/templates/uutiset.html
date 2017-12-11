@@ -17,9 +17,19 @@
 
                 </li>
             </ul>
-
+        </div>
+        <h2> Luetuimmat </h2>
+        <div>
+            <ul>
+                <li th:each="uutinen : ${uutisetSuosituimmat}">
+                    <a th:href="@{~/uutiset/{id}(id=${uutinen.id})}">
+                        <span th:text="${uutinen.otsikko}"></span>
+                    </a>
+                </li>
+            </ul>
         </div>
         <p><a href="/lisaaUutinen">Lisää uusi uutinen tästä! </a></p>
+        <p><a href="/muokkaaUutista">Muokkaa olemassa olevaa uutista tästä! </a></p>
     </body>
 
 </html>

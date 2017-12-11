@@ -28,6 +28,7 @@ public class Uutinen extends AbstractPersistable<Long> {
 
     public Uutinen() {
         this.julkaisuaika = LocalDateTime.now();
+        this.lukukertoja = 0;
     }
 
     public void lisaaKirjoittaja(Kirjoittaja kirjoittaja) {

@@ -29,10 +29,10 @@ public class UutinenController {
     private KategoriaRepository kategoriaRepository;
 
     @GetMapping("/uutiset")
-    public String list(Model model) {
-        PageRequest pageable = PageRequest.of(0, 5, Sort.Direction.ASC, "julkaisuaika");
+    public String listaaUutiset(Model model) {
+        PageRequest pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "julkaisuaika");
         model.addAttribute("uutisetJulkaisuaika", uutinenRepository.findAll(pageable));
-        PageRequest pageable1 = PageRequest.of(0, 5, Sort.Direction.ASC, "lukukertoja");
+        PageRequest pageable1 = PageRequest.of(0, 5, Sort.Direction.DESC, "lukukertoja");
         model.addAttribute("uutisetSuosituimmat", uutinenRepository.findAll(pageable1));
         return "uutiset";
     }
@@ -43,6 +43,37 @@ public class UutinenController {
         model.addAttribute("uutiset", uutinenRepository.findAll());
         model.addAttribute("kirjoittajat", kirjoittajaRepository.findAll());
         return "lisaaUutinen";
+    }
+
+    @GetMapping("/muokkaaUutista")
+    public String muokkaaUutista(Model model) {
+        model.addAttribute("kategoriat", kategoriaRepository.findAll());
+        model.addAttribute("uutiset", uutinenRepository.findAll());
+        model.addAttribute("kirjoittajat", kirjoittajaRepository.findAll());
+        return "muokkaaUutista";
+    }
+
+    @PostMapping("/muokkaaUutista")
+    public String muokkaaUutista(@RequestParam Long uutinen, @RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String teksti, @RequestParam String kirjoittaja) {
+        Uutinen u = uutinenRepository.getOne(uutinen);
+        if (!otsikko.isEmpty()) {
+            u.setOtsikko(otsikko);
+        }
+        if(!ingressi.isEmpty()) {
+            u.setIngressi(ingressi);
+        }
+        if(!teksti.isEmpty()) {
+            u.setTeksti(teksti);
+        }
+        Kirjoittaja k = kirjoittajaRepository.findByNimi(kirjoittaja);
+        if (k == null) {
+            k = new Kirjoittaja();
+            k.setNimi(kirjoittaja);
+            kirjoittajaRepository.save(k);
+        }
+        u.lisaaKirjoittaja(k);
+        uutinenRepository.save(u);
+        return "redirect:/muokkaaUutista";
     }
 
     @PostMapping("/lisaaUutinen")
@@ -82,6 +113,9 @@ public class UutinenController {
 
     @GetMapping("/uutiset/{id}")
     public String uutinen(Model model, @PathVariable Long id) {
+        Uutinen u = uutinenRepository.getOne(id);
+        u.setLukukertoja(u.getLukukertoja() + 1);
+        uutinenRepository.save(u);
         model.addAttribute("uutinen", uutinenRepository.getOne(id));
         model.addAttribute("kirjoittajat", uutinenRepository.getOne(id).getKirjoittajat());
         model.addAttribute("kategoriat", uutinenRepository.getOne(id).getKategoriat());
