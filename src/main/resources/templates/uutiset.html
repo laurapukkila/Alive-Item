@@ -13,8 +13,9 @@
                 <li th:each="uutinen : ${uutisetJulkaisuaika}">
                     <a th:href="@{~/uutiset/{id}(id=${uutinen.id})}">
                         <span th:text="${uutinen.otsikko}"></span>
-                    </a>
-
+                    </a> <br>
+                        <span th:text="${uutinen.ingressi}"></span>
+                        <span th:text="${uutinen.julkaisuaika}"></span>
                 </li>
             </ul>
         </div>
@@ -24,10 +25,25 @@
                 <li th:each="uutinen : ${uutisetSuosituimmat}">
                     <a th:href="@{~/uutiset/{id}(id=${uutinen.id})}">
                         <span th:text="${uutinen.otsikko}"></span>
+                    </a> <br>
+                        <span th:text="${uutinen.ingressi}"></span>
+                        <span th:text="${uutinen.julkaisuaika}"></span>
+
+                </li>
+            </ul>
+        </div>
+        <h2> Hae kategorian mukaan </h2>
+        <div>
+            <ul>
+                <li th:each="kategoria : ${kategoriat}">
+                    <a th:href="@{~/kategoria/{id}(id=${kategoria.id})}">
+                        <span th:text="${kategoria.nimi}"></span>
                     </a>
                 </li>
             </ul>
         </div>
+
+
         <p><a href="/lisaaUutinen">Lisää uusi uutinen tästä! </a></p>
         <p><a href="/muokkaaUutista">Muokkaa olemassa olevaa uutista tästä! </a></p>
     </body>

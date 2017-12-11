@@ -34,6 +34,7 @@ public class UutinenController {
         model.addAttribute("uutisetJulkaisuaika", uutinenRepository.findAll(pageable));
         PageRequest pageable1 = PageRequest.of(0, 5, Sort.Direction.DESC, "lukukertoja");
         model.addAttribute("uutisetSuosituimmat", uutinenRepository.findAll(pageable1));
+        model.addAttribute("kategoriat", kategoriaRepository.findAll());
         return "uutiset";
     }
 
@@ -88,9 +89,11 @@ public class UutinenController {
         kirjoittajaRepository.save(k);
         u.lisaaKirjoittaja(k);
 
-        Kategoria kat = kategoriaRepository.findByNimi(kategoria);
-        u.lisaaKategoria(kat);
-
+        Kategoria kategori = kategoriaRepository.findByNimi(kategoria);
+        kategori.lisaaUutinen(u);
+        u.lisaaKategoria(kategori);
+        
+        kategoriaRepository.save(kategori);
         uutinenRepository.save(u);
         return "redirect:/lisaaUutinen";
     }
@@ -98,7 +101,10 @@ public class UutinenController {
     @PostMapping("/lisaaKategoria")
     public String lisaaKategoria(@RequestParam Long uutinen, @RequestParam Long kategoria) {
         Uutinen u = uutinenRepository.getOne(uutinen);
-        u.lisaaKategoria(kategoriaRepository.getOne(kategoria));
+        Kategoria k = kategoriaRepository.getOne(kategoria);
+        u.lisaaKategoria(k);
+        k.lisaaUutinen(u);
+        kategoriaRepository.save(k);
         uutinenRepository.save(u);
         return "redirect:/lisaaUutinen";
     }
@@ -121,5 +127,13 @@ public class UutinenController {
         model.addAttribute("kategoriat", uutinenRepository.getOne(id).getKategoriat());
         model.addAttribute("julkaisuaika", uutinenRepository.getOne(id).getJulkaisuaika());
         return "uutinen";
+    }
+    
+    @GetMapping("/kategoria/{id}")
+    public String kategoria(Model model, @PathVariable Long id) {
+        Kategoria k = kategoriaRepository.getOne(id);
+        model.addAttribute("kategoria", k);
+        model.addAttribute("uutiset", k.getUutiset());
+        return "kategoria";
     }
 }
