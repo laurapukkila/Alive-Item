@@ -34,13 +34,17 @@ public class Uutinen extends AbstractPersistable<Long> {
         if (this.kirjoittajat == null) {
             this.kirjoittajat = new ArrayList<>();
         }
-        kirjoittajat.add(kirjoittaja);
+        if (!this.kirjoittajat.contains(kirjoittaja)) {
+            kirjoittajat.add(kirjoittaja);
+        }
     }
 
     public void lisaaKategoria(Kategoria kategoria) {
         if (this.kategoriat == null) {
             this.kategoriat = new ArrayList<>();
         }
-        kategoriat.add(kategoria);
+        if (!this.kategoriat.contains(kategoria)) {
+            kategoriat.add(kategoria);
+        }
     }
 }

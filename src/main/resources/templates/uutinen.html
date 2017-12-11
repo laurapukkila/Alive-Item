@@ -2,15 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
-        <title>Lauran uutiset</title>
+        <title></title>
     </head>
     <body>
 
-        <h2 th:text="${uutinen.otsikko}"></h2>
-
-        <p th:text="${uutinen.ingressi}"</p>
+        <h1 th:text="${uutinen.otsikko}"></h1>
+        <h2 th:text="${uutinen.ingressi}"></h2>
         <p th:text="${uutinen.teksti}"</p>
-
+        <h3>Kirjoittajat:</h3>
+        <ul 
+            <li th:each="kirjoittaja : ${kirjoittajat}">
+                <span th:text="${kirjoittaja.nimi}"></span>
+            </li>
+        </ul>
+        <h3>Kategoriat:</h3>
+        <ul
+            <li th:each="kategoria : ${kategoriat}">
+                <span th:text="${kategoria.nimi}"></span>
+            </li>
+        </ul>
+        <p><a href="/uutiset">Takaisin etusivulle</a></p>
     </body>
 
 </html>
